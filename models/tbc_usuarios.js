@@ -42,8 +42,14 @@ module.exports = (sequelize, DataTypes) => {
     fecha_registro: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'tbc_Usuario',
+    modelName: 'tbc_Usuarios',
   });
+  tbc_usuarios.associate = (models) => {
+    tbc_usuarios.hasMany(models.tbb_carritos, {
+      ForeignKey: 'id_usuario',
+      as: 'tbb_carritos'
+    })
+  }
   return tbc_Usuario;
 };
 /*'use strict';

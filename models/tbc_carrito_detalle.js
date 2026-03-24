@@ -22,5 +22,17 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'tbc_carrito_detalle',
   });
+  tbb_productos.associate = (models) => {
+    tbb_productos.hasMany(models.tbc_carrito_detalle, {
+      ForeignKey: 'id_producto',
+      as: 'tbb_productos'
+    })
+  };
+  tbb_carritos.associate = (models) => {
+    tbb_carritos.hasMany(models.tbc_carrito_detalle, {
+      ForeignKey: 'id_carrito',
+      as: 'tbc_carrito_detalle'
+    })
+  };
   return tbc_carrito_detalle;
 };
