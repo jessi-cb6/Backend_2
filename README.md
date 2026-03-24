@@ -32,4 +32,23 @@ Sigue estos pasos para configurar y correr el proyecto localmente:
 4. Ejecuta los siguientes comandos:
 
 ```bash
-git clone [https://github.com/Weildor/Backend-tienda-virtual.git](https://github.com/Weildor/Backend-tienda-virtual.git)
+- git config --global user.name "tu_usuario"
+- git config --global user.email "tu_email@example.com"
+- git clone <enlace-del-repo>
+
+# 2. Crear un Proyecto con Vite y React
+Una vez hayas clonado el repositorio o creado un nuevo proyecto, ingresa el siguiente comando para inicializarlo:
+npm create vite@5.1.0 nombre-app --template react
+
+# 3. Acceder a la carpeta del proyecto
+Navega al directorio del proyecto recién creado:
+cd nombre-app
+
+#4. Instalar las dependencias de NPM
+Instala las dependencias necesarias para correr el proyecto:
+npm install
+
+#5. Iniciar el Proyecto
+Inicia el servidor de desarrollo con el siguiente comando:
+npm run dev
+
