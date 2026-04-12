@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false }));
 //Configurar las rutas de bienvenida al servidor
 app.get('/', (req, res)=>res.status(200).send({
-    message: 'Biemnvenida a la API REST de compras.',
+    message: 'Bienvenido a la API REST de compras.',
 }))
 //creando rutas
-require('./routes/route_categoria')(app);
+require('./routes/route_categorias')(app);
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 const server = http.createServer(app);

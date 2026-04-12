@@ -1,4 +1,57 @@
 'use strict';
+const { Model } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
+  class tbc_Usuario extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // Un usuario tiene muchos carritos
+      tbc_Usuario.hasMany(models.tbb_carritos, {
+        foreignKey: 'id_usuario', // ¡Siempre con f minúscula!
+        as: 'carritos' // Le puse un alias más limpio
+      });
+    }
+  }
+
+  tbc_Usuario.init({
+    nombre: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    direccion: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    telefono: {
+      type: DataTypes.STRING(15), // Cambiado a 15 (lógico para un teléfono)
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(150), // Cambiado a 150 (lógico para un email)
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING(120),
+      allowNull: false
+    },
+    rol: {
+      type: DataTypes.ENUM('admin', 'cliente'),
+      allowNull: false, // ¡Corregido! (antes decía allowNUll)
+      defaultValue: 'cliente'
+    },
+    fecha_registro: DataTypes.DATE
+  }, {
+    sequelize,
+    modelName: 'tbc_Usuario', // Lo dejé igual que el nombre de tu clase
+  });
+
+  return tbc_Usuario;
+};
+/*'use strict';
 const {
   Model
 } = require('sequelize');
@@ -8,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
+     *
     static associate(models) {
       // define association here
     }
@@ -52,6 +105,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   return tbc_Usuario;
 };
+*/
+
+//////////////////////////////////////////////////////
 /*'use strict';
 /** @type {import('sequelize-cli').Migration} */
 /*
