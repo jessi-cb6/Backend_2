@@ -1,4 +1,36 @@
 'use strict';
+const { Model } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
+  class tbb_productos extends Model {
+    static associate(models) {
+      // Un producto PERTENECE A una categoría
+      tbb_productos.belongsTo(models.tbc_categorias, {
+        foreignKey: 'id_categoria', // F minúscula
+        as: 'categoria'
+      });
+
+      // Un producto puede estar en MUCHOS detalles de carrito
+      tbb_productos.hasMany(models.tbc_carrito_detalle, {
+        foreignKey: 'id_productos',
+        as: 'detalles_carrito'
+      });
+    }
+  }
+  tbb_productos.init({
+    nombre: DataTypes.STRING,
+    descripcion: DataTypes.STRING,
+    precio: DataTypes.STRING,
+    stock: DataTypes.STRING,
+    id_categoria: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'tbb_productos',
+  });
+
+  return tbb_productos;
+};
+/*'use strict';
 const {
   Model
 } = require('sequelize');
@@ -9,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
+     *
     static associate(models) {
       // define association here
     }
@@ -38,3 +70,4 @@ module.exports = (sequelize, DataTypes) => {
   }
   return tbb_productos;
 };
+*/
