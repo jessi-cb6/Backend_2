@@ -18,13 +18,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  tbb_carritos.init({
-    id_usuario: DataTypes.INTEGER, // ¡Cambiado a INTEGER porque es una llave foránea!
-    fecha_creacion: DataTypes.DATE // ¡Cambiado a DATE para manejar fechas de verdad!
-  }, {
-    sequelize,
-    modelName: 'tbb_carritos',
-  });
+  // En tbb_carritos.js dentro de la inicialización
+// En tbb_carritos.js
+tbb_carritos.init({
+  id_usuario: DataTypes.INTEGER,
+  fecha_creacion: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW // <--- Esto hace la magia automáticamente
+  }
+}, {
+  sequelize,
+  modelName: 'tbb_carritos',
+  timestamps: true
+});
 
   return tbb_carritos;
 };
